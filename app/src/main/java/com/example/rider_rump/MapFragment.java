@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -30,10 +31,24 @@ import java.util.ArrayList;
 import Fragments.BottomInfoMapMarkerFragment;
 import Fragments.EmptyFragment;
 
+import static com.example.rider_rump.R.drawable.fire;
+import static com.example.rider_rump.R.drawable.ic_skatepark_marker;
+import static com.example.rider_rump.R.drawable.icon_marcer_skeyt_park;
+
 public class MapFragment extends Fragment{
 
     private GoogleMap mMap;
     public String t;
+
+
+//    ArrayList<LatLng>arrayList=new ArrayList<LatLng>();
+//    LatLng mrk_1 = new LatLng (55.66644256492747, 37.657960610180254);
+//    LatLng mrk_2 = new LatLng (55.760589622946796, 37.76058489623442);
+//    LatLng mrk_3 = new LatLng (55.69783758576582, 37.76747544044882);
+//    LatLng mrk_4 = new LatLng (55.7691592523669, 37.624148919529034);
+
+//    ArrayList<String> title = new ArrayList<String>();
+//    ArrayList<Integer> icon = new ArrayList<Integer>();
 
 //    ArrayList<LatLng>arrayList=new ArrayList<LatLng>();
 //    LatLng mrk_1 = new LetLng(55.66644256492747, 37.657960610180254);
@@ -43,6 +58,30 @@ public class MapFragment extends Fragment{
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         SupportMapFragment supportMapFragment = (SupportMapFragment)getChildFragmentManager().findFragmentById(R.id.google_map);
+
+
+//        arrayList.add(mrk_1);
+//        arrayList.add(mrk_2);
+//        arrayList.add(mrk_3);
+//        arrayList.add(mrk_4);
+//
+//        title.add("Скейт-парк Goparks в парке Садовники");
+//        title.add("Скейт-парк FK-Ramps в Измайловском парке");
+//        title.add("Скейт-парк в Кузьминках");
+//        title.add("Скейт-парк на Цветном бульваре");
+//
+//        icon.add(icon_marcer_skeyt_park);
+//        icon.add(ic_skatepark_marker);
+//        icon.add(ic_skatepark_marker);
+//        icon.add(fire);
+
+
+
+//        icon.add(bitmapDescriptorFromVector(getActivity(), R.drawable.ic_skatepark_marker));
+
+
+
+
 
 
 
@@ -70,6 +109,23 @@ public class MapFragment extends Fragment{
 
 
 
+
+
+
+
+//                for (int i=0; i<arrayList.size();i++){
+//                    for (int j = 0; j<title.size(); j++){
+////                        for (int m = 0; m<icon.size(); m++) {
+//
+//                            mMap.addMarker(new MarkerOptions().position(arrayList.get(i)).title(String.valueOf(title.get(j)))
+//                                    .icon(bitmapDescriptorFromVector(getActivity(), ic_skatepark_marker)));
+////                        }
+//                    }
+//                    mMap.moveCamera(CameraUpdateFactory.newLatLng(arrayList.get(i)));
+//                }
+
+
+
                 try {
                     boolean success = googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(getActivity(), R.raw.mapstyle));
                 } catch (Resources.NotFoundException e) {
@@ -94,19 +150,18 @@ public class MapFragment extends Fragment{
                     @Override
                     public boolean onMarkerClick(Marker marker) {
 
-//                        new BottomInfoMapMarkerFragment(marker.getTitle());
+//                        BottomInfoMapMarkerFragment bottomInfoMapMarkerFragment = new BottomInfoMapMarkerFragment();
+//
+//                        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+//                        fragmentTransaction.replace(R.id.container_marker_info, new BottomInfoMapMarkerFragment(marker.getTitle()));
+//                        fragmentTransaction.commit();
 
-//                        Toast.makeText(getActivity(), marker.getTitle(), Toast.LENGTH_SHORT).show();
+                        String markertitle=marker.getTitle();
+
                         BottomInfoMapMarkerFragment bottomInfoMapMarkerFragment = new BottomInfoMapMarkerFragment();
-
-//                        bottomInfoMapMarkerFragment.setTitle(marker.getTitle());
-
-//                        bottomInfoMapMarkerFragment.setTitle(marker.getTitle());
-
                         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.container_marker_info, new BottomInfoMapMarkerFragment(marker.getTitle()));
                         fragmentTransaction.commit();
-
 
                         return false;
                     }
@@ -128,21 +183,30 @@ public class MapFragment extends Fragment{
                 });
 
             }
-            private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId){
-                Drawable vectoDrawable=ContextCompat.getDrawable(context,vectorResId);
-                vectoDrawable.setBounds(0,0,vectoDrawable.getIntrinsicWidth(),
-                        vectoDrawable.getIntrinsicHeight());
-                Bitmap bitmap = Bitmap.createBitmap(vectoDrawable.getIntrinsicWidth(),
-                        vectoDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
-                Canvas canvas = new Canvas(bitmap);
-                vectoDrawable.draw(canvas);
-                return BitmapDescriptorFactory.fromBitmap(bitmap);
-            }
+//            private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId){
+//                Drawable vectoDrawable=ContextCompat.getDrawable(context,vectorResId);
+//                vectoDrawable.setBounds(0,0,vectoDrawable.getIntrinsicWidth(),
+//                        vectoDrawable.getIntrinsicHeight());
+//                Bitmap bitmap = Bitmap.createBitmap(vectoDrawable.getIntrinsicWidth(),
+//                        vectoDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+//                Canvas canvas = new Canvas(bitmap);
+//                vectoDrawable.draw(canvas);
+//                return BitmapDescriptorFactory.fromBitmap(bitmap);
+//            }
         });
         return view;
     }
 
-
+    private BitmapDescriptor bitmapDescriptorFromVector(Context context, int vectorResId) {
+        Drawable vectoDrawable=ContextCompat.getDrawable(context,vectorResId);
+        vectoDrawable.setBounds(0,0,vectoDrawable.getIntrinsicWidth(),
+                vectoDrawable.getIntrinsicHeight());
+        Bitmap bitmap = Bitmap.createBitmap(vectoDrawable.getIntrinsicWidth(),
+                vectoDrawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        vectoDrawable.draw(canvas);
+        return BitmapDescriptorFactory.fromBitmap(bitmap);
+    }
 
 
 }

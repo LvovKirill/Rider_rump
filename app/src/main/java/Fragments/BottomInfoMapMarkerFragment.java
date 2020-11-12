@@ -18,13 +18,15 @@ import android.widget.Toast;
 import com.example.rider_rump.MainActivity;
 import com.example.rider_rump.MapFragment;
 import com.example.rider_rump.R;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 import Utils.ShapeStyleForImage;
 
 public class BottomInfoMapMarkerFragment extends MapFragment {
 
     TextView markertxt;
-    public String t;
+    public String title;
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -42,11 +44,7 @@ public class BottomInfoMapMarkerFragment extends MapFragment {
     }
 
     public  BottomInfoMapMarkerFragment(String title) {
-        t=title;
-    }
-
-    public void setTitle(String t){
-        this.t = t;
+        this.title=title;
     }
 
     public BottomInfoMapMarkerFragment() {
@@ -82,7 +80,24 @@ public class BottomInfoMapMarkerFragment extends MapFragment {
                 }
             });
 
-         markertxt.setText(t);
+         markertxt.setText(title);
+
+        switch (title){
+            case "Скейт-парк Goparks в парке Садовники":
+                imageView.setImageResource(R.drawable.sadovniki_info_window);
+                break;
+            case "Скейт-парк FK-Ramps в Измайловском парке":
+                imageView.setImageResource(R.drawable.fk_rumps_izmailovo_info_window);
+                break;
+            case "Скейт-парк в Кузьминках":
+                imageView.setImageResource(R.drawable.kuzminki_info_window);
+                break;
+            case "Скейт-парк на Цветном бульваре":
+                imageView.setImageResource(R.drawable.zvitnoi_bulvar_info_window);
+                break;
+        }
+
+
 
 //         String title =
 
